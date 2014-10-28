@@ -4,7 +4,7 @@
   "description": "Utility functions for bcoin",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "mocha --reporter spec test/*.js"
   },
   "keywords": [
     "bcoin",
@@ -14,5 +14,12 @@
     "varint"
   ],
   "author": "Stanislas Marion <stanislas.marion@gmail.com> (http://github.com/czzarr)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bn.js": "^0.14.1",
+    "hash.js": "^0.3.2"
+  },
+  "devDependencies": {
+    "mocha": "^2.0.1"
+  }
 }
