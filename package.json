@@ -1,0 +1,18 @@
+{
+  "name": "bcoin-utils",
+  "version": "1.0.0",
+  "description": "Utility functions for bcoin",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "keywords": [
+    "bcoin",
+    "bitcoin",
+    "utils",
+    "base58",
+    "varint"
+  ],
+  "author": "Stanislas Marion <stanislas.marion@gmail.com> (http://github.com/czzarr)",
+  "license": "MIT"
+}
