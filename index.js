@@ -1,4 +1,5 @@
 var bn = require('bn.js')
+var constants = require('bitcoin-constants')
 var hash = require('hash.js')
 
 var utils = module.exports
@@ -428,4 +429,30 @@ utils.isIP = function(ip) {
     return 6;
 
   return 0;
+};
+
+utils.addr2hash = function addr2hash (addr, network) {
+  if (!Array.isArray(addr))
+    addr = utils.fromBase58(addr);
+
+  if (addr.length !== 25)
+    return [];
+  if (addr[0] !== constants(network).wif.pub)
+    return [];
+
+  var chk = utils.checksum(addr.slice(0, -4));
+  if (utils.readU32(chk, 0) !== utils.readU32(addr, 21))
+    return [];
+
+  return addr.slice(1, -4);
+}
+
+utils.hash2addr = function hash2addr (hash, network) {
+  hash = utils.toArray(hash, 'hex');
+
+  // Add version
+  hash = [ constants(network).wif.pub ].concat(hash);
+
+  var addr = hash.concat(utils.checksum(hash));
+  return utils.toBase58(addr);
 };
