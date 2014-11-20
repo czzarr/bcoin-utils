@@ -456,3 +456,27 @@ utils.hash2addr = function hash2addr (hash, network) {
   var addr = hash.concat(utils.checksum(hash));
   return utils.toBase58(addr);
 };
+
+utils.readIntv = function readIntv(p, off) {
+    if (!off) off = 0;
+
+    var r, bytes;
+    if (p[off] < 0xfd) {
+        r = p[off];
+        bytes = 1;
+    } else if (p[off] === 0xfd) {
+        r = p[off + 1] | (p[off + 2] << 8);
+        bytes = 3;
+    } else if (p[off] === 0xfe) {
+        r = readU32(p, off + 1);
+        bytes = 5;
+    } else {
+        r = 0;
+        bytes = 9;
+    }
+
+    return {
+        off: off + bytes,
+        r: r
+    };
+}
