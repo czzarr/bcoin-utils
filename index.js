@@ -468,7 +468,7 @@ utils.readIntv = function readIntv(p, off) {
         r = p[off + 1] | (p[off + 2] << 8);
         bytes = 3;
     } else if (p[off] === 0xfe) {
-        r = readU32(p, off + 1);
+        r = utils.readU32(p, off + 1);
         bytes = 5;
     } else {
         r = 0;
